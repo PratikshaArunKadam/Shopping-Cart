@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		table{
+			border-radius: 10px ;
+		}
+		.mybtn1{
+			margin-right:20px;
+		}
+		.mybtn2{
+			margin-right:20px;
+		}
+
+		#qty{
+           margin-right:20px;
+		}
+		#dn{
+           margin-right:20px;
+		}
+		table, th, td {
+           border: 1px solid black;
+           border-radius: 2px;
+           width: 15%;
+         } 
+        th{
+        	background-color: skyblue;
+           }
+
+	</style>
+
+	<link rel="stylesheet" type="text/css"  href="D:\PRACTICALS AND ASSIGNMENTS\ASSIGNMENTS\css\all.min.css">
+</head>
+<body>
+	  <div style="float: left; width:50%">
+	  <table border="1" style="background-color:#416578; border-color: black; height: 200px; width: 400px; border-radius: 10px;">
+		<tr>
+			<th >SR.No</th>
+			<th>Input</th>
+			<th >Price</th>
+			<th colspan="3" style="width:40%">Quantity</th>
+			<th >Total</th>
+			
+		</tr>
+
+		<tr>
+			<td style="background-color:#98c1d6">1</td>
+			<td style="background-color:#98c1d6">T-Shirt</td>
+			<td style="background-color:#98c1d6" id="prc1">299</td>
+			<td style="background-color: white; " id="cnt1"></td>
+			<td style="background-color:#98c1d6" id="plus1" onclick="sr1plus()">+</td>
+			<td style="background-color:#98c1d6" id="minus1" onclick="sr1minus()">-</td>
+			<td style="background-color:white;" id="total1">0</td>
+		</tr>
+		<tr>
+			<td style="background-color:#98c1d6">2</td>
+			<td style="background-color:#98c1d6">T-Shirt</td>
+			<td style="background-color:#98c1d6" id="prc2">499</td>
+			<td style="background-color: white;" id="cnt2"></td>
+			<td style="background-color:#98c1d6" id="plus2" onclick="sr2plus()">+</td>
+			<td style="background-color:#98c1d6" id="minus2" onclick="sr2minus()">-</td>
+			<td style="background-color:white;" id="total2">0</td>
+		</tr>
+		<tr>
+			<td style="background-color:#98c1d6">2</td>
+			<td style="background-color:#98c1d6">Shirt</td>
+			<td style="background-color:#98c1d6" id="prc3">599</td>
+			<td style="background-color: white;" id="cnt3"></td>
+			<td style="background-color:#98c1d6" id="plus3" onclick="sr3plus()">+</td>
+			<td style="background-color:#98c1d6" id="minus3" onclick="sr3minus()">-</td>
+			<td style="background-color:white;" id="total3">0</td>
+		</tr>
+		<tr>
+			<td style="background-color:#98c1d6">3</td>
+			<td style="background-color:#98c1d6">Jeans</td>
+			<td style="background-color:#98c1d6" id="prc4">899</td>
+			<td style="background-color: white;" id="cnt4"></td>
+			<td style="background-color:#98c1d6" id="plus4" onclick="sr4plus()">+</td>
+			<td style="background-color:#98c1d6" id="minus4" onclick="sr4minus()">-</td>
+		    <td style="background-color:white;" id="total4">0</td>
+		</tr>
+		<tr>
+			<th>Grand Total:</th>
+			<td colspan="6" id="gt" class="gtt"></td>	
+		</tr>
+	</table><br>
+
+<!-- button checkout -->
+	<input type="button" name="" id="checkout1" value="Checkout" style="background-color:#98c1d6; position:absolute; bottom:200px; height:25px; width:100px; font-size: large;" onclick="checkout();">
+	<br></div>
+
+<!-- dynamically added button to this divs -->
+    <div id="mydiv1" style="width: 50%; float: right;"></div><br>
+	<div id="div2" style="float: right; width: 50%;"></div>
+	<div id="div3" style="float: right; width: 50%;"></div>
+	<div id="div4" style="float: right; width: 50%;"></div>
+	<div id="div5" style="float: right; width: 50%;"></div><br>
+	
+<!-- Icons  -->
+	<div style=" position: absolute;float:right; bottom: 200px; right: 0; width:50%">
+		Please rate the App:<br>
+	    <i class="fa-solid fa-face-angry" id="angry" onclick="angry()" style="font-size: x-large; color:#416578"></i>
+	    <i class="fa-solid fa-face-frown" id="sad" onclick="sad()" style="font-size: x-large; color:#416578"></i>
+	    <i class="fa-solid fa-face-meh" id="quit" onclick="quit()" style="font-size: x-large; color:#416578"></i>
+	    <i class="fa-solid fa-face-smile" id="smile" onclick="smile()" style="font-size: x-large; color:#416578"></i>
+	    <i class="fa-solid fa-face-grin-hearts" id="love" onclick="love()" style="font-size: x-large; color:#416578"></i>
+</body>
+
+<script type="text/javascript">
+	var count1=0,count2=0,count3=0,count4=0;
+    var val1=299,val2=499,val3=599,val4=899;
+    var res1,res2,res3,val,qt;
+    var grandT=0;
+     var emoji1,emoji2,emoji3,emoji4,emoji5;
+     
+   
+	function sr1plus(){
+		var price=document.getElementById("prc1");
+		var cv=document.getElementById("cnt1");
+		var plus=document.getElementById("plus1");
+		var ttl=document.getElementById("total1");
+        count1++;
+        cv.textContent=+count1;
+		res1=val1*count1;
+		ttl.textContent=+res1;
+	    grandT=grandT+res1;	
+		var gt1=document.getElementById("gt").innerHTML=+grandT;
+        
+	}
+
+
+	function sr1minus(){
+		var cv=document.getElementById("cnt1");
+		var ttl=document.getElementById("total1");
+		count1--;
+		cv.textContent=+count1;
+		res1=res1-val1;
+		ttl.textContent=+res1;
+		grandT=grandT-val1;
+        var gt1=document.getElementById("gt").innerHTML=+grandT;
+
+	}
+		function sr2plus(){
+
+		var cv=document.getElementById("cnt2");
+		
+		var ttl=document.getElementById("total2");
+        count2++;
+        cv.textContent=+count2;
+		res2=val2*count2;
+		ttl.textContent=+res2;	
+		grandT=res1+res2+grandT;
+		var gt1=document.getElementById("gt").innerHTML=+grandT;
+        
+	}
+
+
+	function sr2minus(){
+		var cv=document.getElementById("cnt2");
+		var ttl=document.getElementById("total2");
+		count2--;
+		cv.textContent=+count2;
+		res2=res2-val2;
+		ttl.textContent=+res2;
+		
+        grandT=grandT-val2;
+        var gt1=document.getElementById("gt").innerHTML=+grandT;
+       
+	}
+	function sr3plus(){
+
+		var cv=document.getElementById("cnt3");
+		
+		var ttl=document.getElementById("total3");
+        count3++;
+        cv.textContent=+count3;
+		res3=val3*count3;
+		ttl.textContent=+res3;	
+		grandT=res1+res2+res3+grandT;
+		var gt1=document.getElementById("gt").innerHTML=+grandT;
+        
+	}
+
+
+	function sr3minus(){
+		var cv=document.getElementById("cnt3");
+		var ttl=document.getElementById("total3");
+		count3--;
+		cv.textContent=+count3;
+		res3=res3-val3;
+		ttl.textContent=+res3;
+		
+        grandT=grandT-val3;
+        var gt1=document.getElementById("gt").innerHTML=+grandT;
+       
+	}
+
+	function sr4plus(){
+
+		var cv=document.getElementById("cnt4");
+		
+		var ttl=document.getElementById("total4");
+        count4++;
+        cv.textContent=+count4;
+		res4=val4*count4;
+		ttl.textContent=+res4;	
+		grandT=res1+res2+res3+res4+grandT;
+		var gt1=document.getElementById("gt").innerHTML=+grandT;
+        
+	}
+
+
+	function sr4minus(){
+		var cv=document.getElementById("cnt4");
+		var ttl=document.getElementById("total4");
+		count4--;
+		cv.textContent=+count4;
+		res4=res4-val4;
+		ttl.textContent=+res4;
+		
+        grandT=grandT-val4;
+        var gt1=document.getElementById("gt").innerHTML=+grandT;
+       
+	}
+
+	function checkout(){
+		// console.log(grandT);
+		var targetNode=document.getElementById("mydiv1");
+		targetNode.textContent="Select your  method of payment";
+		var targetNode1=document.getElementById("div2");
+		var bt1=document.createElement("button");
+		bt1.type='button';
+		bt1.className="mybtn1";
+		bt1.value="Cash";
+		bt1.style="background-color:#416578; heigth:30px; width:100px";
+		bt1.onclick=cash;
+		targetNode1.appendChild(bt1);
+		bt1.textContent="Cash";
+
+
+		var bt2=document.createElement("button");
+		bt2.type='button';
+		bt2.className="mybtn2";
+		bt2.value="Card";
+		bt2.style="background-color:#416578;heigth:30px; width:100px";
+		targetNode1.appendChild(bt2);
+		bt2.textContent="Card";
+
+	}
+
+	function cash(){
+		                                            
+		var targetNode2=document.getElementById("div3");
+		targetNode2.textContent="Enter Amount";
+
+        var targetNode3=document.getElementById("div4");
+        qt=document.createElement('input');  // create input type number dynamically
+        qt.type='number';
+        qt.setAttribute('id','qty');
+        qt.style=' heigth:25px; width:100px';
+       qt.onmouseover=mouseOver;
+       qt.onmouseout=mouseOut;
+        targetNode3.appendChild(qt);
+      
+                                                    //creating dynamic button 'Done' 
+        var done=document.createElement('input');
+        done.type='button';
+        done.value='Done';
+        done.style="background-color:#416578;heigth:25px; width:100px";
+        done.setAttribute('id','dn');
+        done.onclick=submit;
+        targetNode3.appendChild(done);
+        
+       
+	}
+	function mouseOver(){
+		qt.style="background-color:#416578";
+	}
+	function mouseOut(){
+		qt.style="background-color:null";
+	}
+
+	function submit(){                                         //this function is for button Done which is dynamically created
+		var targetNode4=document.getElementById("div5");
+		
+		val=qt.value;           //got the user entered value from input type number
+        var res=grandT-val;
+		if(val<grandT){
+			targetNode4.textContent="Please pay the remaining amount " + res + " By card";
+		}
+        
+        else{
+        	targetNode4.textContent=`"Payment Done..... 
+        	Thnak you For the Shopping...!
+        	 Have a Nice Day..."`
+        }
+	}
+
+
+	emoji1=document.getElementById("angry");
+    emoji2=document.getElementById("sad");
+    emoji3=document.getElementById("quit");
+    emoji4=document.getElementById("smile");
+    emoji5=document.getElementById("love");
+
+    function angry(){
+    	
+        emoji1.style="font-size:xx-large; color:yellow";
+
+    	
+    	emoji2.className="";
+    	
+    	emoji3.className="";
+    
+    	emoji4.className="";
+    	
+    	emoji5.className="";
+    }
+
+   function sad(){
+
+     	emoji2.style="font-size:xx-large; color:yellow";
+
+    	emoji1.className="";
+
+    	emoji3.className="";
+    
+    	emoji4.className="";
+    	
+        emoji5.className="";
+   }
+
+    function quit(){
+
+     	emoji3.style="font-size:xx-large; color:yellow";
+
+    	emoji1.className="";
+
+    	emoji2.className="";
+    
+    	emoji4.className="";
+    	
+        emoji5.className="";
+   }
+   
+
+    function smile(){
+
+     	emoji4.style="font-size:xx-large; color:yellow";
+
+    	emoji1.className="";
+
+    	emoji2.className="";
+    
+    	emoji3.className="";
+    	
+        emoji5.className="";
+   } 
+
+
+    function love(){
+
+     	emoji5.style="font-size:xx-large; color:yellow";
+
+    	emoji1.className="";
+
+    	emoji2.className="";
+    
+    	emoji3.className="";
+    	
+        emoji4.className="";
+   }
+	
+</script>
+
+</html>
